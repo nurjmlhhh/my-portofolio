@@ -38,6 +38,70 @@ body {
   z-index: 10;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
+/* Navbar links default tanpa underline */
+.navbar .links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  position: relative;
+}
+.navbar .links a,
+.navbar .links .btn-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px; /* sama dengan tombol toggle */
+}
+/* Hover: underline halus + ganti warna */
+.navbar .links a:hover {
+  color: var(--pastel-secondary);
+}
+
+.navbar .links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--pastel-secondary);
+  transition: width 0.3s ease;
+}
+
+.navbar .links a:hover::after {
+  width: 100%;
+}
+
+/* Tombol toggle mode */
+.btn-theme {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--text-dark); /* default ikut teks */
+  background: transparent;
+  color: var(--text-dark); /* saat light mode → hitam */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+/* Hover effect (light mode) */
+.btn-theme:hover {
+  background: var(--text-dark);
+  color: #fff; /* icon jadi putih */
+}
+
+/* Dark mode versi */
+.dark-theme .btn-theme {
+  border: 2px solid var(--pastel-secondary);
+  color: var(--pastel-secondary);
+}
+.dark-theme .btn-theme:hover {
+  background: var(--pastel-secondary);
+  color: #fff;
+}
 
 .logo {
   font-size: 1.6rem;
@@ -64,7 +128,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 50px;
-  background: linear-gradient(135deg, #fdfdfd, #eaf6ff);
+  background: linear-gradient(135deg, var(--pastel-bg), #eaf6ff);
 }
 
 .hero-text h2 {
@@ -114,7 +178,7 @@ body {
 
 /* === Sections === */
 .section {
-  padding: 65px 50px; /* lebih rapat */
+  padding: 80px 50px; 
   text-align: center;
   background: var(--pastel-bg);
 }
@@ -348,13 +412,14 @@ body {
   .hero {
     flex-direction: column;
     text-align: center;
-    padding: 100px 30px 40px;
+    /* padding: 100px 30px 40px; */
   }
   .hero-text {
     order: 2;
   }
   .hero-img {
     order: 1;
+    margin-top: 50px;
   }
 }
 
@@ -367,7 +432,7 @@ body {
     margin: 0 8px;
   }
   .section {
-    padding: 50px 25px; /* lebih rapat di layar kecil */
+    padding: 30px 25px;
   }
   .skills-grid,
   .projects .project-grid,
@@ -396,4 +461,223 @@ body {
     font-size: 0.85rem;
     padding: 10px 18px;
   }
+}
+
+/* === Contact Container === */
+.contact-container {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* Form Styling */
+.contact-form {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 15px;
+  border: 1px solid var(--pastel-primary);
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--pastel-secondary);
+  box-shadow: 0 0 8px rgba(247,178,189,0.4);
+}
+.contact-form button {
+  align-self: flex-start;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Certificates === */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.cert-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.cert-card img {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+.cert-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--pastel-primary);
+}
+.cert-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.cert-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(247, 178, 189, 0.4);
+}
+
+/* === Responsive Certificates === */
+@media (max-width: 992px) {
+  .cert-card img {
+    height: 160px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .cert-grid {
+    grid-template-columns: 1fr; 
+  }
+  .cert-card {
+    text-align: center;
+  }
+  .cert-card img {
+    height: auto;
+    max-height: 220px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .cert-card h4 {
+    font-size: 1rem;
+  }
+  .cert-card p {
+    font-size: 0.85rem;
+  }
+}
+
+/* === Dark Mode Palette === */
+.dark-theme {
+  --pastel-bg: #1c1e26;         /* background utama */
+  --card-bg: #2a2d38;           /* kartu lebih lembut */
+  --pastel-primary: #8fb4f9;    /* biru pastel soft */
+  --pastel-secondary: #f39aaa;  /* pink pastel kalem */
+  --pastel-accent: #9adbb5;     /* hijau pastel muted */
+  --pastel-highlight: #ffe59a;  /* kuning pastel lembut */
+  --text-dark: #f5f5f5;         /* teks utama */
+  --text-muted: #b5b5b5;        /* teks sekunder */
+  background: var(--pastel-bg);
+  color: var(--text-dark);
+}
+
+/* Navbar & Footer */
+.dark-theme .navbar {
+  background: var(--card-bg);
+  color: var(--text-dark);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+.dark-theme .navbar a {
+  color: var(--text-dark);
+}
+.dark-theme .navbar a:hover {
+  color: var(--pastel-secondary);
+}
+
+.dark-theme .footer {
+  background: var(--card-bg);
+  color: var(--text-dark);
+}
+
+/* Hero */
+.dark-theme .hero {
+  background: linear-gradient(135deg, var(--pastel-bg), #2a2d38);
+}
+.dark-theme .hero-text h2 {
+  color: var(--text-dark);
+}
+.dark-theme .highlight {
+  color: var(--pastel-secondary);
+}
+
+/* Section Titles & Text */
+.dark-theme .section-title {
+  color: var(--pastel-primary);
+}
+.dark-theme .section-text {
+  color: var(--text-muted);
+}
+
+/* Buttons */
+.dark-theme .btn,
+.dark-theme .btn-project {
+  background: linear-gradient(45deg, var(--pastel-secondary), var(--pastel-primary));
+  color: #fff;
+}
+.dark-theme .btn:hover,
+.dark-theme .btn-project:hover {
+  box-shadow: 0 0 18px rgba(143, 180, 249, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Cards (skills, projects, certs, contact form) */
+.dark-theme .skill-card,
+.dark-theme .project-card,
+.dark-theme .cert-card,
+.dark-theme .contact-form {
+  background: var(--card-bg);
+  color: var(--text-dark);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+.dark-theme .skill-card h4,
+.dark-theme .project-card h4,
+.dark-theme .cert-card h4 {
+  color: var(--pastel-secondary);
+}
+.dark-theme .project-card p,
+.dark-theme .cert-card p,
+.dark-theme .skill-card li {
+  color: var(--text-muted);
+}
+
+/* Contact links */
+.dark-theme .contact-links a {
+  background: var(--card-bg);
+  color: var(--text-dark);
+}
+.dark-theme .contact-links a:hover {
+  background: var(--pastel-accent);
+  color: #1c1e26;
+}
+/* Tool Tag Dark Mode */
+.dark-theme .tool-tag {
+  background: var(--pastel-highlight);
+  color: #1c1e26;   
+}
+
+
+/* Dark mode override */
+.dark-theme .btn-theme {
+  border: 2px solid var(--pastel-secondary);
+  color: var(--pastel-secondary);
+}
+.dark-theme .btn-theme:hover {
+  background: var(--pastel-secondary);
+  color: #fff;
 }

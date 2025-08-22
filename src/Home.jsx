@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import profilImg from "./assets/profil.jpg";
 import novelmiImg from "./assets/novelmi.png";
+
 import {
   FaReact,
   FaHtml5,
@@ -11,6 +12,8 @@ import {
   FaDocker,
   FaEnvelope,
   FaLinkedin,
+  FaMoon,
+  FaSun,
 } from "react-icons/fa";
 import {
   SiTailwindcss,
@@ -22,16 +25,31 @@ import {
 } from "react-icons/si";
 
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "dark";
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark-theme");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.body.classList.remove("dark-theme");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
   useEffect(() => {
     const revealElements = document.querySelectorAll(
-      ".section, .hero, .project-card, .card"
+      ".section, .hero, .project-card, .skill-card, .cert-card"
     );
 
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
       revealElements.forEach((el) => {
         const position = el.getBoundingClientRect().top;
-        if (position < windowHeight - 100) {
+        if (position < windowHeight - 80) {
           el.classList.add("reveal");
         }
       });
@@ -45,7 +63,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      {/* Navbar */}
+      {/* === Navbar === */}
       <nav className="navbar">
         <h1 className="logo">
           Jamilah's <span>Portofolio</span>
@@ -54,11 +72,19 @@ export default function Home() {
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
+          <a href="#certificates">Certificates</a>
           <a href="#contact">Contact</a>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="btn-theme"
+            aria-label="Toggle Dark Mode"
+          >
+            {darkMode ? <FaSun /> : <FaMoon />}
+          </button>
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* === Hero === */}
       <section className="hero">
         <div className="hero-text">
           <h2>
@@ -80,7 +106,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* === About === */}
       <section id="about" className="section">
         <h3 className="section-title">About Me</h3>
         <p className="section-text">
@@ -90,11 +116,10 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Skills Section */}
+      {/* === Skills === */}
       <section id="skills" className="section skills">
         <h3 className="section-title">Skills</h3>
         <div className="skills-grid">
-          {/* Frontend */}
           <div className="skill-card">
             <h4>Frontend</h4>
             <ul>
@@ -119,7 +144,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Backend */}
           <div className="skill-card">
             <h4>Backend</h4>
             <ul>
@@ -138,7 +162,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Tools */}
           <div className="skill-card">
             <h4>Tools</h4>
             <ul>
@@ -152,7 +175,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Other */}
           <div className="skill-card">
             <h4>Other</h4>
             <ul>
@@ -164,7 +186,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects */}
+      {/* === Projects === */}
       <section id="projects" className="section projects">
         <h3 className="section-title">Projects</h3>
         <div className="project-grid">
@@ -214,7 +236,6 @@ export default function Home() {
               <img src={p.img} alt={p.title} />
               <h4>{p.title}</h4>
               <p>{p.desc}</p>
-
               <div className="project-tools">
                 {p.tools.map((tool, i) => (
                   <span key={i} className="tool-tag">
@@ -222,7 +243,6 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-
               <a
                 href={p.link}
                 target="_blank"
@@ -236,34 +256,91 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact
+      {/* === Certificates === */}
+      <section id="certificates" className="section certificates">
+        <h3 className="section-title">Certificates</h3>
+        <div className="cert-grid">
+          {[
+            {
+              id: 1,
+              title: "JavaScript Programming",
+              desc: "Fundamentals of JavaScript programming.",
+              img: novelmiImg,
+            },
+            {
+              id: 2,
+              title: "Backend Development with Node.js",
+              desc: "REST API and server-side development.",
+              img: novelmiImg,
+            },
+            {
+              id: 3,
+              title: "Database Design",
+              desc: "Relational & NoSQL database fundamentals.",
+              img: novelmiImg,
+            },
+          ].map((c) => (
+            <div key={c.id} className="cert-card">
+              <img src={c.img} alt={c.title} />
+              <h4>{c.title}</h4>
+              <p>{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* === Contact === */}
       <section id="contact" className="section contact">
         <h3 className="section-title">Contact Me</h3>
-        <div className="contact-links">
-          <a
-            href="mailto:nurjamilahh98@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
+        <p className="section-text">
+          Feel free to reach out to me through the form or the platforms below
+          🚀
+        </p>
+        <div className="contact-container">
+          <div className="contact-links">
+            <a href="mailto:nurjamilah@example.com">
+              <FaEnvelope className="icon" /> Email
+            </a>
+            <a
+              href="https://github.com/nurjmlhhh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub className="icon" /> GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/nurjamilah"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin className="icon" /> LinkedIn
+            </a>
+          </div>
+          <form
+            className="contact-form"
+            action="mailto:nurjamilah@example.com"
+            method="POST"
+            encType="text/plain"
           >
-            <FaEnvelope className="icon" /> Email
-          </a>
-          <a
-            href="https://github.com/nurjmlhhh"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaGithub className="icon" /> GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/nur-jamilah-966b98328/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaLinkedin className="icon" /> LinkedIn
-          </a>
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows="5"
+              required
+            ></textarea>
+            <button type="submit" className="btn">
+              Send Message
+            </button>
+          </form>
         </div>
-      </section> */}
-
+      </section>
     </div>
   );
 }

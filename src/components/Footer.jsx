@@ -5,19 +5,16 @@ export default function Footer() {
   return (
     <footer className="footer pastel-footer">
       <div className="footer-grid">
-        {/* Phone */}
         <div>
           <h4>Phone</h4>
           <p>0838-5442-6758</p>
         </div>
 
-        {/* Email */}
         <div>
           <h4>Email</h4>
           <p>nurjamilahh98@gmail.com</p>
         </div>
 
-        {/* Social */}
         <div>
           <h4>Follow Me In</h4>
           <div className="social-icons">
@@ -29,7 +26,7 @@ export default function Footer() {
               <FaLinkedin />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/nr_jmlhhh/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -45,7 +42,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="copyright">
           © 2025 By <span>NurJamilah</span>
         </div>
