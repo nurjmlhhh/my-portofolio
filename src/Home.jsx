@@ -2,14 +2,21 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import profilImg from "./assets/profil.jpg";
 import novelmiImg from "./assets/novelmi.png";
-
+import trainingcImg from "./assets/trainingc.jpg";
+import basisImg from "./assets/basis.jpg";
+import strukturImg from "./assets/struktur.jpg";
+import webImg from "./assets/web.jpg";
+import javafundamentalImg from "./assets/javafundamental.jpg";
+import javaImg from "./assets/java.jpg";
+import reactImg from "./assets/react.jpg";
+import gitImg from "./assets/git.jpg";
+import instrukturImg from "./assets/instruktur.jpg";
 import {
   FaReact,
   FaHtml5,
   FaCss3Alt,
   FaNodeJs,
   FaGithub,
-  FaDocker,
   FaEnvelope,
   FaLinkedin,
   FaMoon,
@@ -18,13 +25,13 @@ import {
 import {
   SiTailwindcss,
   SiJavascript,
-  SiTypescript,
   SiExpress,
-  SiMongodb,
   SiMysql,
 } from "react-icons/si";
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("experience");
+
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem("theme");
     return saved === "dark";
@@ -83,7 +90,6 @@ export default function Home() {
           </button>
         </div>
       </nav>
-
       {/* === Hero === */}
       <section className="hero">
         <div className="hero-text">
@@ -105,15 +111,59 @@ export default function Home() {
           <img src={profilImg} className="profilImg" alt="profile" />
         </div>
       </section>
-
       {/* === About === */}
-      <section id="about" className="section">
-        <h3 className="section-title">About Me</h3>
-        <p className="section-text">
-          I’m passionate about technology and backend systems. My goal is to
-          become a reliable backend engineer who builds applications that are
-          scalable and easy to maintain.
-        </p>
+      <section id="about" className="section about">
+        <div className="about-container">
+          {/* Kiri: About Text */}
+          <div className="about-text">
+            <h3 className="section-title">About Me</h3>
+            <p className="section-text">
+              I am a final semester Accounting student with a strong passion for
+              programming and software development. My background in accounting
+              has shaped me to be detail-oriented and analytical, while my
+              programming skills allow me to build efficient and practical
+              digital solutions, especially in business and finance.
+            </p>
+          </div>
+
+          {/* Kanan: Tabs */}
+          <div className="about-box">
+            <div className="about-tabs">
+              <button
+                className={activeTab === "experience" ? "tab active" : "tab"}
+                onClick={() => setActiveTab("experience")}
+              >
+                Experience
+              </button>
+              <button
+                className={activeTab === "education" ? "tab active" : "tab"}
+                onClick={() => setActiveTab("education")}
+              >
+                Education
+              </button>
+            </div>
+
+            {/* Isi Tab */}
+            <div className="about-content">
+              {activeTab === "experience" && (
+                <ul>
+                  <li>
+                    💻 Magang Administrasi Akademik | Universitas Nasional PASIM
+                  </li>
+                  <li>
+                    👥 Java Assistant Instructor | PUB (Pemberdayaan Umat Berkelanjutan) 
+                  </li>
+                </ul>
+              )}
+              {activeTab === "education" && (
+                <ul>
+                  <li>🎓 S1 Accounting - Pasim National University</li>
+                  <li>🎓 MA YPI Nurul Huda - mathematics and natural sciences</li>
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* === Skills === */}
@@ -138,9 +188,6 @@ export default function Home() {
               <li>
                 <SiJavascript className="icon js" /> JavaScript
               </li>
-              <li>
-                <SiTypescript className="icon ts" /> TypeScript
-              </li>
             </ul>
           </div>
 
@@ -151,10 +198,10 @@ export default function Home() {
                 <FaNodeJs className="icon node" /> Node.js / Express
               </li>
               <li>
-                <SiExpress className="icon express" /> RESTful API
+                ☕ Java
               </li>
               <li>
-                <SiMongodb className="icon mongo" /> MongoDB
+                <SiExpress className="icon express" /> RESTful API
               </li>
               <li>
                 <SiMysql className="icon mysql" /> MySQL
@@ -167,9 +214,6 @@ export default function Home() {
             <ul>
               <li>
                 <FaGithub className="icon git" /> Git / GitHub
-              </li>
-              <li>
-                <FaDocker className="icon docker" /> Docker
               </li>
               <li>📮 Postman</li>
             </ul>
@@ -185,7 +229,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* === Projects === */}
       <section id="projects" className="section projects">
         <h3 className="section-title">Projects</h3>
@@ -255,7 +298,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
       {/* === Certificates === */}
       <section id="certificates" className="section certificates">
         <h3 className="section-title">Certificates</h3>
@@ -263,21 +305,57 @@ export default function Home() {
           {[
             {
               id: 1,
-              title: "JavaScript Programming",
-              desc: "Fundamentals of JavaScript programming.",
-              img: novelmiImg,
+              title: "Logic Algorithm (C Languange)",
+              desc: "PUB Training Center Programming",
+              img: trainingcImg,
             },
             {
-              id: 2,
-              title: "Backend Development with Node.js",
-              desc: "REST API and server-side development.",
-              img: novelmiImg,
+              id: 1,
+              title: "Data Structure (C Languange)",
+              desc: "PUB Training Center Programming",
+              img: strukturImg,
             },
             {
-              id: 3,
-              title: "Database Design",
-              desc: "Relational & NoSQL database fundamentals.",
-              img: novelmiImg,
+              id: 1,
+              title: "Database Programming Training",
+              desc: "PUB Training Center Programming",
+              img: basisImg,
+            },
+            {
+              id: 1,
+              title: "Web Programming Training (HTML, CSS, JavaScript)",
+              desc: "PUB Training Center Programming",
+              img: webImg,
+            },
+            {
+              id: 1,
+              title: "JAVA Fundamental Backend",
+              desc: "PUB Training Center Programming",
+              img: javafundamentalImg,
+            },
+            {
+              id: 1,
+              title: "Advance JAVA Backend (Springboot)",
+              desc: "PUB Training Center Programming",
+              img: javaImg,
+            },
+            {
+              id: 1,
+              title: "React Programming Training",
+              desc: "PUB Training Center Programming",
+              img: reactImg,
+            },
+            {
+              id: 1,
+              title: "Git and GitHub Training",
+              desc: "PUB Training Center Programming",
+              img: gitImg,
+            },
+            {
+              id: 1,
+              title: "Java Assistant Instructor",
+              desc: "PUB Training Center Programming",
+              img: instrukturImg,
             },
           ].map((c) => (
             <div key={c.id} className="cert-card">
@@ -288,7 +366,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
       {/* === Contact === */}
       <section id="contact" className="section contact">
         <h3 className="section-title">Contact Me</h3>
